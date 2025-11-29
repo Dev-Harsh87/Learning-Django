@@ -1,12 +1,44 @@
 {% extends "base.html" %}
 
 {% block page_title %}
-All Chai Page
+All Chai
 {% endblock %}
 
 {% block page_content %}
-<h1 class="flex items-center justify-center h-screen" >All Chai Page</h1>
+<h1 class="text-3xl font-bold text-center my-8">All Chai For You</h1>
 
-<h2>All Chai Available Here.. </h2>
-<h3>Find your chai</h3>
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-6">
+    {% for chai in chais %}
+   <div class="bg-white border rounded-xl shadow-md hover:shadow-lg transition p-4">
+
+    <!-- Image center -->
+    <div class="w-full h-50 overflow-hidden rounded-md mb-3 flex justify-center">
+        <img src="{{ chai.image.url }}" 
+             alt="{{ chai.name }}" 
+             class="max-h-full max-w-full object-contain rounded-md">
+    </div>
+
+    <!-- Text left aligned -->
+<div class="flex items-center justify-between mb-2 w-full">
+    <h2 class="text-xl font-semibold text-gray-800">{{ chai.name }}</h2>
+    <h3 class="text-lg text-amber-600 font-bold">${{ chai.price }}</h3>
+</div>
+
+
+    <div class="text-sm text-gray-700 space-y-1 text-left">
+        <p><span class="font-semibold">Type:</span> {{ chai.chai_type }}</p>
+    </div>
+
+    <!-- Left aligned button -->
+    <div class="mt-4 text-center">
+        <a href="{% url 'chai_detail' chai.id %}" 
+           class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition inline-block w-full">
+            View Details
+        </a>
+    </div>
+
+</div>
+
+    {% endfor %}
+</div>
 {% endblock %}

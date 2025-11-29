@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+Chai Details
+{% endblock %}
+
+{% block page_content %}
+
+<h1 class="text-3xl font-bold text-center my-8">{{ chai.name }} Details</h1>
+
+<div class="w-full flex justify-center px-4">
+
+    <div class="bg-white border border-gray-200 rounded-xl shadow-sm p-6 w-full max-w-lg">
+
+        <!-- Image Box -->
+        <div class="w-full bg-gray-100 rounded-lg flex items-center justify-center mb-6 p-4">
+            <img src="{{ chai.image.url }}" 
+                 alt="{{ chai.name }}" 
+                 class="max-w-full max-h-72 object-contain">
+        </div>
+
+        <!-- Name + Price -->
+        <div class="flex items-start justify-between mb-4">
+            <h2 class="text-2xl font-semibold text-gray-800">{{ chai.name }}</h2>
+            <span class="text-xl font-bold text-amber-600">${{ chai.price }}</span>
+        </div>
+
+        <!-- Description -->
+        <p class="text-gray-700 text-sm leading-relaxed mb-5">
+            {{ chai.description }}
+        </p>
+
+        <!-- Info Section -->
+        <div class="bg-gray-50 p-4 rounded-lg border text-sm text-gray-700 space-y-2">
+            <p><span class="font-semibold">Type:</span> {{ chai.chai_type }}</p>
+            <p><span class="font-semibold">Added On:</span> {{ chai.created_at|date:'M d, Y' }}</p>
+        </div>
+
+        <!-- Back Button -->
+        <div class="mt-6">
+            <a href="{% url 'all_chai' %}" 
+               class="inline-block bg-amber-500 hover:bg-amber-600 text-white font-medium px-5 py-2 rounded-lg transition w-full text-center">
+                Back to All Chai
+            </a>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

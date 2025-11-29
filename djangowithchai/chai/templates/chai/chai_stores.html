@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+Chai Stores
+{% endblock %}
+
+{% block page_content %}
+
+<h1 class="text-3xl font-bold text-center my-6">Chai Stores</h1>
+
+<div class="max-w-2xl mx-auto">
+
+    <!-- Form Box -->
+    <form method="POST" class="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
+        {% csrf_token %}
+
+        <label for="id_chai_varity" class="block mb-2 font-semibold text-gray-700">
+            Select Chai Variety:
+        </label>
+
+        <div class="flex gap-3 items-center">
+            {{ form.chai_varity }}
+
+            <button type="submit" 
+                class="bg-amber-500 hover:bg-amber-600 text-white font-medium px-4 py-2 rounded-lg transition">
+                Find Stores
+            </button>
+        </div>
+
+    </form>
+
+    <!-- Stores Result Section -->
+    {% if stores %}
+        <p class="mt-6 text-gray-700 font-medium">
+            Stores found: {{ stores.count }}
+        </p>
+
+        <ul class="mt-4 space-y-4">
+            {% for store in stores %}
+                <li class="p-4 bg-white border border-gray-200 rounded-lg shadow-sm">
+                    <h2 class="text-lg font-semibold text-gray-800">{{ store.name }}</h2>
+                    <p class="text-gray-700 text-sm">{{ store.address }}</p>
+                    <p class="text-gray-700 text-sm">Contact: {{ store.contact_number }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+
+    {% else %}
+        <h3 class="mt-6 text-gray-600 text-center">
+            No stores found for the selected chai variety.
+        </h3>
+    {% endif %}
+
+</div>
+
+{% endblock %}
